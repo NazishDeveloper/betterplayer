@@ -42,7 +42,6 @@ class MockMethodChannel {
               const StandardMethodCodec()
                   .encodeSuccessEnvelope(_getInitResult()),
               (ByteData? data) {});
-      return null;
     });
 
     eventsChannels.add(eventChannel);
