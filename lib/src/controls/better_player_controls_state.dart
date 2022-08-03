@@ -345,12 +345,12 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
   }
 
   Widget _buildResolutionSelectionRow(String name, String url) {
+    if(name=="Auto"){
     final bool isSelected =
         url == betterPlayerController!.betterPlayerDataSource!.url;
     return BetterPlayerMaterialClickableWidget(
       onTap: () {
         Navigator.of(context).pop();
-        betterPlayerController!.setResolution(url);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
@@ -373,6 +373,37 @@ abstract class BetterPlayerControlsState<T extends StatefulWidget>
         ),
       ),
     );
+    }else{
+      final bool isSelected =
+          url == betterPlayerController!.betterPlayerDataSource!.url;
+      return BetterPlayerMaterialClickableWidget(
+        onTap: () {
+          Navigator.of(context).pop();
+          betterPlayerController!.setResolution(url);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+          child: Row(
+            children: [
+              SizedBox(width: isSelected ? 8 : 16),
+              Visibility(
+                  visible: isSelected,
+                  child: Icon(
+                    Icons.check_outlined,
+                    color:
+                    betterPlayerControlsConfiguration.overflowModalTextColor,
+                  )),
+              const SizedBox(width: 16),
+              Text(
+                name,
+                style: _getOverflowMenuElementTextStyle(isSelected),
+              ),
+            ],
+          ),
+        ),
+      );
+
+    }
   }
 
   void _showAudioTracksSelectionWidget() {
