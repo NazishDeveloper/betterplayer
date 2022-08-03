@@ -204,6 +204,7 @@ class _BetterPlayerMaterialControlsState
                           controlsNotVisible, _onPlayerHide)
                     else
                       const SizedBox(),
+                    Icon(Icons.arrow_back),
                     _buildMoreButton(),
                   ],
                 ),
