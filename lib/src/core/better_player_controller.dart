@@ -957,7 +957,7 @@ class BetterPlayerController {
       throw StateError("The data source has not been initialized");
     }
     CustomBetterPlayer.currentQualityUrl = url.toString();
-    CustomBetterPlayer.isChanged = true;
+    // CustomBetterPlayer.isChanged = true;
     final position = await videoPlayerController!.position;
     final wasPlayingBeforeChange = isPlaying()!;
     pause();

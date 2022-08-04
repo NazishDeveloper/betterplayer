@@ -108,8 +108,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
     }
   }
 
-  Container _buildPlayerWithControls(
-      BetterPlayerController betterPlayerController, BuildContext context) {
+  Container _buildPlayerWithControls(BetterPlayerController betterPlayerController, BuildContext context) {
     final configuration = betterPlayerController.betterPlayerConfiguration;
     var rotation = configuration.rotation;
 
@@ -188,8 +187,8 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
 
   Widget _buildMaterialControl() {
     return BetterPlayerMaterialControls(
-      onControlsVisibilityChanged: onControlsVisibilityChanged,
       controlsConfiguration: controlsConfiguration,
+      onControlsVisibilityChanged: onControlsVisibilityChanged,
     );
   }
 
