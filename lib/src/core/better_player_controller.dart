@@ -1356,7 +1356,7 @@ class BetterPlayerController {
   static const String _speedParameter = "speed";
   static const String _dataSourceParameter = "dataSource";
   static const String _authorizationHeader = "Authorization";
-
+  bool isTrailer = false;
   ///General configuration used in controller instance.
   final BetterPlayerConfiguration betterPlayerConfiguration;
 
@@ -1549,6 +1549,7 @@ class BetterPlayerController {
       this.betterPlayerConfiguration, {
         this.betterPlayerPlaylistConfiguration,
         BetterPlayerDataSource? betterPlayerDataSource,
+        this.isTrailer = false,
       }) {
     this._betterPlayerControlsConfiguration =
         betterPlayerConfiguration.controlsConfiguration;

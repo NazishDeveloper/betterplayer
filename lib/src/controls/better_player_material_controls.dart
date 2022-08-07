@@ -1112,7 +1112,7 @@ class _BetterPlayerMaterialControlsState
                 ],
               ),
             ),
-            Expanded(
+            !_betterPlayerController!.isTrailer? Expanded(
               flex: 75,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -1131,7 +1131,7 @@ class _BetterPlayerMaterialControlsState
                   PlayerMediaOptions(),
                 ],
               ),
-            ),
+            ) : SizedBox.shrink(),
           ],
         ),
       ),
