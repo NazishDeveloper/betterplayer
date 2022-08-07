@@ -1076,7 +1076,7 @@ class _BetterPlayerMaterialControlsState
       duration: _controlsConfiguration.controlsHideTime,
       onEnd: _onPlayerHide,
       child: Container(
-        height: _controlsConfiguration.controlBarHeight + 26.0,
+        height: !_betterPlayerController!.isTrailer? _controlsConfiguration.controlBarHeight +  26.0 : _controlsConfiguration.controlBarHeight + 20,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
