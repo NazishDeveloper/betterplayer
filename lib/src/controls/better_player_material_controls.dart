@@ -1000,7 +1000,7 @@ class _BetterPlayerMaterialControlsState
               Spacer(flex: 5,),
               PlayerChangeFit(
                 controller: _betterPlayerController,
-                setFit: CustomBetterPlayer.betterPlayer.setFit
+                setFit: CustomBetterPlayer.customBetterPlayerState.betterPlayer.setFit
               ),
               // _buildMoreButton(),
             ],
