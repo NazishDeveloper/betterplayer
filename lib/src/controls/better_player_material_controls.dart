@@ -1133,7 +1133,7 @@ class _BetterPlayerMaterialControlsState
                     child: PlayerLock(),
                   ),
                   PlayerListOf(),
-                  PlayerMediaOptions(resolutions: betterPlayerController!.betterPlayerDataSource!.resolutions),
+                  PlayerMediaOptions(resolutions: betterPlayerController!.betterPlayerDataSource!.resolutions, controller: _betterPlayerController),
                 ],
               ),
             ) : SizedBox.shrink(),
