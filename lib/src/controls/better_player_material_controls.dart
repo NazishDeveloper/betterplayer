@@ -1000,7 +1000,7 @@ class _BetterPlayerMaterialControlsState
               Spacer(flex: 5,),
               PlayerChangeFit(
                 controller: _betterPlayerController,
-                setFit: CustomBetterPlayer.customBetterPlayerState.betterPlayer.setFit
+                // setFit: CustomBetterPlayer.customBetterPlayerState.betterPlayer.setFit
               ),
               // _buildMoreButton(),
             ],
@@ -1009,7 +1009,7 @@ class _BetterPlayerMaterialControlsState
       )
           : const SizedBox(),
     );
-    // betterPlayerController!.
+    // betterPlayerController!.ov
   }
 
   Widget _buildPipButton() {
