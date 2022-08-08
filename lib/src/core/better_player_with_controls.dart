@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 class BetterPlayerWithControls extends StatefulWidget {
   final BetterPlayerController? controller;
 
-  const BetterPlayerWithControls({Key? key, this.controller}) : super(key: key);
-
+   BetterPlayerWithControls({Key? key, this.controller}) : super(key: key);
+   late _BetterPlayerWithControlsState betterPlayerWithControlsState;
   @override
   _BetterPlayerWithControlsState createState() =>
       _BetterPlayerWithControlsState();
@@ -31,7 +31,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
       StreamController();
 
   bool _initialized = false;
-
+  late _BetterPlayerVideoFitWidget betterPlayerVideoFitWidget;
   StreamSubscription? _controllerEventSubscription;
 
   @override
@@ -131,7 +131,7 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
           if (placeholderOnTop) _buildPlaceholder(betterPlayerController),
           Transform.rotate(
             angle: rotation * pi / 180,
-            child: _BetterPlayerVideoFitWidget(
+            child: betterPlayerVideoFitWidget = _BetterPlayerVideoFitWidget(
               betterPlayerController,
               betterPlayerController.getFit(),
             ),
@@ -206,18 +206,17 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
 
 ///Widget used to set the proper box fit of the video. Default fit is 'fill'.
 class _BetterPlayerVideoFitWidget extends StatefulWidget {
-  const _BetterPlayerVideoFitWidget(
+  _BetterPlayerVideoFitWidget(
     this.betterPlayerController,
     this.boxFit, {
     Key? key,
   }) : super(key: key);
-
+  late _BetterPlayerVideoFitWidgetState betterPlayerVideoFitWidgetState;
   final BetterPlayerController betterPlayerController;
-  final BoxFit boxFit;
+  BoxFit boxFit;
 
   @override
-  _BetterPlayerVideoFitWidgetState createState() =>
-      _BetterPlayerVideoFitWidgetState();
+  _BetterPlayerVideoFitWidgetState createState() => betterPlayerVideoFitWidgetState = _BetterPlayerVideoFitWidgetState();
 }
 
 class _BetterPlayerVideoFitWidgetState
@@ -259,6 +258,12 @@ class _BetterPlayerVideoFitWidgetState
     }
   }
 
+  void setFit(BoxFit fit){
+    setState(() {
+      widget.boxFit = fit;
+    });
+  }
+
   void _initialize() {
     if (controller?.value.initialized == false) {
       _initializedListener = () {
@@ -293,6 +298,8 @@ class _BetterPlayerVideoFitWidgetState
       }
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {

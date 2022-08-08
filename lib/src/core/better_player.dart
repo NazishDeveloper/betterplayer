@@ -50,7 +50,7 @@ class _BetterPlayerState extends State<BetterPlayer>
       widget.controller.betterPlayerConfiguration;
 
   bool _isFullScreen = false;
-
+  static late BetterPlayerWithControls betterPlayerWithControls;
   ///State of navigator on widget created
   late NavigatorState _navigatorState;
 
@@ -266,10 +266,14 @@ class _BetterPlayerState extends State<BetterPlayer>
       key: Key("${widget.controller.hashCode}_key"),
       onVisibilityChanged: (VisibilityInfo info) =>
           widget.controller.onPlayerVisibilityChanged(info.visibleFraction),
-      child: BetterPlayerWithControls(
+      child: betterPlayerWithControls = BetterPlayerWithControls(
         controller: widget.controller,
       ),
     );
+  }
+
+  void setFit(BoxFit fit){
+    betterPlayerWithControls!.betterPlayerWithControlsState!.betterPlayerVideoFitWidget!.betterPlayerVideoFitWidgetState!.setFit(fit);
   }
 
   @override
