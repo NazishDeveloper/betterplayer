@@ -10,7 +10,7 @@ import 'package:wakelock/wakelock.dart';
 
 ///Widget which uses provided controller to render video player.
 class BetterPlayer extends StatefulWidget {
-  const BetterPlayer({Key? key, required this.controller}) : super(key: key);
+  BetterPlayer({Key? key, required this.controller}) : super(key: key);
 
   factory BetterPlayer.network(
     String url, {
@@ -35,9 +35,11 @@ class BetterPlayer extends StatefulWidget {
               BetterPlayerDataSource(BetterPlayerDataSourceType.file, url),
         ),
       );
-
+  late BetterPlayerWithControls betterPlayerWithControls;
+  void setFit(BoxFit fit){
+    betterPlayerWithControls!.betterPlayerWithControlsState!.betterPlayerVideoFitWidget!.betterPlayerVideoFitWidgetState!.setFit(fit);
+  }
   final BetterPlayerController controller;
-
   @override
   _BetterPlayerState createState() {
     return _BetterPlayerState();
@@ -50,7 +52,7 @@ class _BetterPlayerState extends State<BetterPlayer>
       widget.controller.betterPlayerConfiguration;
 
   bool _isFullScreen = false;
-  static late BetterPlayerWithControls betterPlayerWithControls;
+
   ///State of navigator on widget created
   late NavigatorState _navigatorState;
 
@@ -266,15 +268,13 @@ class _BetterPlayerState extends State<BetterPlayer>
       key: Key("${widget.controller.hashCode}_key"),
       onVisibilityChanged: (VisibilityInfo info) =>
           widget.controller.onPlayerVisibilityChanged(info.visibleFraction),
-      child: betterPlayerWithControls = BetterPlayerWithControls(
+      child: widget.betterPlayerWithControls = BetterPlayerWithControls(
         controller: widget.controller,
       ),
     );
   }
 
-  void setFit(BoxFit fit){
-    betterPlayerWithControls!.betterPlayerWithControlsState!.betterPlayerVideoFitWidget!.betterPlayerVideoFitWidgetState!.setFit(fit);
-  }
+
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {

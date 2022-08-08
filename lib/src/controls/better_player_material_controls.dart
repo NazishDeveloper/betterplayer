@@ -998,7 +998,10 @@ class _BetterPlayerMaterialControlsState
               //   child: PlayerHeading(),
               // ): SizedBox.shrink(),
               Spacer(flex: 5,),
-
+              PlayerChangeFit(
+                controller: _betterPlayerController,
+                setFit: BetterPlayer
+              ),
               // _buildMoreButton(),
             ],
           ),
