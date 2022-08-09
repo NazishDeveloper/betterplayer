@@ -17,7 +17,7 @@ class BetterPlayerWithControls extends StatefulWidget {
    late _BetterPlayerWithControlsState betterPlayerWithControlsState;
   @override
   _BetterPlayerWithControlsState createState() =>
-      _BetterPlayerWithControlsState();
+      betterPlayerWithControlsState = _BetterPlayerWithControlsState();
 }
 
 class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
