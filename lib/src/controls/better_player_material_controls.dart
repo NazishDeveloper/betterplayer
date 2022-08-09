@@ -1000,7 +1000,7 @@ class _BetterPlayerMaterialControlsState
               Spacer(flex: 5,),
               !betterPlayerController!.isTrailer? PlayerChangeFit(
                 controller: _betterPlayerController,
-                // setFit: CustomBetterPlayer.customBetterPlayerState.betterPlayer.setFit
+                setFit: CustomBetterPlayer.customBetterPlayerState.betterPlayer.setFit
               ): SizedBox.shrink(),
               // _buildMoreButton(),
             ],
