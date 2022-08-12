@@ -993,7 +993,7 @@ class _BetterPlayerMaterialControlsState
                   },
                 ),),
               Spacer(flex: 5,),
-              !_wasLoading ?
+              !betterPlayerController!.isTrailer ?
               Padding(
                 padding: EdgeInsets.all(8),
                 child: PlayerHeading(),
