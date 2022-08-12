@@ -993,11 +993,11 @@ class _BetterPlayerMaterialControlsState
                   },
                 ),),
               Spacer(flex: 5,),
-              // !_wasLoading ?
-              // Padding(
-              //   padding: EdgeInsets.all(8),
-              //   child: PlayerHeading(),
-              // ): SizedBox.shrink(),
+              !_wasLoading ?
+              Padding(
+                padding: EdgeInsets.all(8),
+                child: PlayerHeading(),
+              ): SizedBox.shrink(),
               Spacer(flex: 5,),
               !betterPlayerController!.isTrailer? PlayerChangeFit(
                 controller: _betterPlayerController,
