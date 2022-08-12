@@ -887,7 +887,8 @@ class _BetterPlayerMaterialControlsState
               right: 0,
               child: _buildTopBar(),
             ),
-            Positioned(bottom: 10, left: 0, right: 0, child: _buildBottomBar()),
+            !betterPlayerController!.isTrailer?
+            Positioned(bottom: 10, left: 0, right: 0, child: _buildBottomBar()) : SizedBox.shrink(),
             _buildNextVideoWidget(),
           ],
         ),
