@@ -149,9 +149,13 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
                 prevScale = 1.0;
                 setState(() {});
               },
-              child: betterPlayerVideoFitWidget = _BetterPlayerVideoFitWidget(
-                betterPlayerController,
-                betterPlayerController.getFit(),
+              child: Transform(
+      alignment: FractionalOffset.center,
+        transform: Matrix4.diagonal3(Vector3(scale,scale,scale)),
+                child: betterPlayerVideoFitWidget =  _BetterPlayerVideoFitWidget(
+                  betterPlayerController,
+                  betterPlayerController.getFit(),
+                ),
               ),
             ),
           ),
