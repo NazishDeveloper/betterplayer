@@ -871,6 +871,7 @@ class _BetterPlayerMaterialControlsState
           BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
         }
       },
+
       child: AbsorbPointer(
         absorbing: controlsNotVisible,
         child: Stack(

@@ -10,6 +10,8 @@ import 'package:better_player/src/subtitles/better_player_subtitles_drawer.dart'
 import 'package:better_player/src/video_player/video_player.dart';
 import 'package:flutter/material.dart';
 
+import 'package:vector_math/vector_math_64.dart' show Vector3;
+
 class BetterPlayerWithControls extends StatefulWidget {
   final BetterPlayerController? controller;
 
@@ -224,6 +226,8 @@ class _BetterPlayerVideoFitWidgetState
   VideoPlayerController? get controller =>
       widget.betterPlayerController.videoPlayerController;
 
+  double scale = 1.0;
+  double prevScale = 1.0;
   bool _initialized = false;
 
   VoidCallback? _initializedListener;
@@ -305,16 +309,34 @@ class _BetterPlayerVideoFitWidgetState
   Widget build(BuildContext context) {
     if (_initialized && _started) {
       return Center(
-        child: ClipRect(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            child: FittedBox(
-              fit: widget.boxFit,
-              child: SizedBox(
-                width: controller!.value.size?.width ?? 0,
-                height: controller!.value.size?.height ?? 0,
-                child: VideoPlayer(controller),
+        child: GestureDetector(
+          onScaleStart: (d){
+            prevScale = scale;
+            setState(() {});
+          },
+          onScaleUpdate: (d){
+            scale = prevScale * d.scale;
+            setState(() {});
+          },
+          onScaleEnd: (d){
+            prevScale = 1.0;
+            setState(() {});
+          },
+          child: ClipRect(
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: FittedBox(
+                fit: widget.boxFit,
+                child: SizedBox(
+                  width: controller!.value.size?.width ?? 0,
+                  height: controller!.value.size?.height ?? 0,
+                  child: Transform(
+                    alignment: FractionalOffset.center,
+                      transform: Matrix4.diagonal3(Vector3(scale,scale,scale)),
+                      child: VideoPlayer(controller)
+                  ),
+                ),
               ),
             ),
           ),
