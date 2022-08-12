@@ -36,6 +36,9 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
   late _BetterPlayerVideoFitWidget betterPlayerVideoFitWidget;
   StreamSubscription? _controllerEventSubscription;
 
+  double scale = 1.0;
+  double prevScale = 1.0;
+
   @override
   void initState() {
     playerVisibilityStreamController.add(true);
@@ -133,9 +136,23 @@ class _BetterPlayerWithControlsState extends State<BetterPlayerWithControls> {
           if (placeholderOnTop) _buildPlaceholder(betterPlayerController),
           Transform.rotate(
             angle: rotation * pi / 180,
-            child: betterPlayerVideoFitWidget = _BetterPlayerVideoFitWidget(
-              betterPlayerController,
-              betterPlayerController.getFit(),
+            child:  GestureDetector(
+              onScaleStart: (d){
+                prevScale = scale;
+                setState(() {});
+              },
+              onScaleUpdate: (d){
+                scale = prevScale * d.scale;
+                setState(() {});
+              },
+              onScaleEnd: (d){
+                prevScale = 1.0;
+                setState(() {});
+              },
+              child: betterPlayerVideoFitWidget = _BetterPlayerVideoFitWidget(
+                betterPlayerController,
+                betterPlayerController.getFit(),
+              ),
             ),
           ),
           betterPlayerController.betterPlayerConfiguration.overlay ??
@@ -226,8 +243,7 @@ class _BetterPlayerVideoFitWidgetState
   VideoPlayerController? get controller =>
       widget.betterPlayerController.videoPlayerController;
 
-  double scale = 1.0;
-  double prevScale = 1.0;
+
   bool _initialized = false;
 
   VoidCallback? _initializedListener;
@@ -309,19 +325,19 @@ class _BetterPlayerVideoFitWidgetState
   Widget build(BuildContext context) {
     if (_initialized && _started) {
       return Center(
-        child: GestureDetector(
-          onScaleStart: (d){
-            prevScale = scale;
-            setState(() {});
-          },
-          onScaleUpdate: (d){
-            scale = prevScale * d.scale;
-            setState(() {});
-          },
-          onScaleEnd: (d){
-            prevScale = 1.0;
-            setState(() {});
-          },
+        // child: GestureDetector(
+        //   onScaleStart: (d){
+        //     prevScale = scale;
+        //     setState(() {});
+        //   },
+        //   onScaleUpdate: (d){
+        //     scale = prevScale * d.scale;
+        //     setState(() {});
+        //   },
+        //   onScaleEnd: (d){
+        //     prevScale = 1.0;
+        //     setState(() {});
+        //   },
           child: ClipRect(
             child: Container(
               width: double.infinity,
@@ -331,17 +347,17 @@ class _BetterPlayerVideoFitWidgetState
                 child: SizedBox(
                   width: controller!.value.size?.width ?? 0,
                   height: controller!.value.size?.height ?? 0,
-                  child: Transform(
-                    alignment: FractionalOffset.center,
-                      transform: Matrix4.diagonal3(Vector3(scale,scale,scale)),
+                  // child: Transform(
+                  //   alignment: FractionalOffset.center,
+                  //     transform: Matrix4.diagonal3(Vector3(scale,scale,scale)),
                       child: VideoPlayer(controller)
                   ),
                 ),
               ),
             ),
-          ),
-        ),
-      );
+          // ),
+        );
+      // );
     } else {
       return const SizedBox();
     }
