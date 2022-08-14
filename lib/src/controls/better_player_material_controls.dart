@@ -880,15 +880,16 @@ class _BetterPlayerMaterialControlsState
             if (_wasLoading)
               Center(child: _buildLoadingWidget())
             else
-              _buildHitArea(),
+              !betterPlayerController!.isTrailer?
+              _buildHitArea() : SizedBox.shrink(),
             Positioned(
               top: 0,
               left: 0,
               right: 0,
               child: _buildTopBar(),
             ),
-            !betterPlayerController!.isTrailer?
-            Positioned(bottom: 10, left: 0, right: 0, child: _buildBottomBar()) : SizedBox.shrink(),
+
+            Positioned(bottom: 10, left: 0, right: 0, child: _buildBottomBar()),
             _buildNextVideoWidget(),
           ],
         ),
