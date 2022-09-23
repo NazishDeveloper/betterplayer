@@ -1264,7 +1264,7 @@ class _BetterPlayerMaterialControlsState
       onClicked: skipForward,
     );
   }
-
+//dkd
   Widget _buildReplayButton(VideoPlayerController controller) {
     final bool isFinished = isVideoFinished(_latestValue);
     return _buildHitAreaClickableButton(
